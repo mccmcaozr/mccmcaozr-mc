@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Narrator-o · Minecraft 旁白模组</title>
+<link rel="icon" href="assets/icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="pano" aria-hidden="true"></div>
+<div class="pano-dim" aria-hidden="true"></div>
+
+<header class="nav"><div class="wrap nav-inner">
+<a class="brand" href="#top"><img src="assets/icon.png" alt="Narrator-o" width="42" height="42"/><span>Narrator-o</span></a>
+<nav class="nav-links">
+<a href="#questions">问题</a>
+<a href="#framework">用法</a>
+<a href="#features">能力</a>
+<a href="#gallery">画面</a>
+<a href="#community">交流群</a>
+</nav>
+</div></header>
+
+<main id="top">
+<section class="wrap hero">
+<div class="hero-main mc-box">
+<div class="eyebrow">ALPHA · NEOFORGE 1.21.1</div>
+<h1>如果方块世界<br/>也有一位会吐槽的旁白？</h1>
+<p class="lead">不是任务插件，也不是只会念稿的音响。Narrator-o 是服务器侧 AI 旁白：观察现场、记住梗、偶尔整活，用字幕与语音把这一局讲成有节奏的故事。</p>
+<div class="hero-actions">
+<a class="btn" href="#framework">看用法框架</a>
+<a class="btn btn-ghost" href="#community">加 QQ 群提建议</a>
+</div>
+<div class="meta-row"><span>作者 <strong>mccmcaozr</strong></span><span>版本 <strong>0.1.0-alpha</strong></span><span>加载器 <strong>NeoForge</strong></span></div>
+</div>
+<aside class="hero-card mc-box-dark">
+<img class="hero-logo" src="assets/logo.png" alt="Logo" width="92" height="92"/>
+<h2>服务器是导演<br/>客户端是剧场</h2>
+<p>LLM 写剧本，技能改世界，TTS 开口。密钥只待在服务端。</p>
+<div class="ticker">
+<span class="chip">LLM</span><span class="chip">TTS</span><span class="chip">字幕</span><span class="chip">整活技能</span><span class="chip">记忆</span>
+</div>
+</aside>
+</section>
+
+<div class="grass-bar" aria-hidden="true"></div>
+
+<section id="questions" class="wrap">
+<div class="section-label">01 QUEST</div><br/>
+<h2 class="section-title">安装之前，先问这几个问题</h2>
+<p class="section-intro">很多 AI 模组只会刷屏。Narrator-o 想解决的是：旁白如何成为玩法，而不是噪音。</p>
+<div class="q-grid">
+<article class="q-card mc-box"><div class="q-num">Q01</div><h3>挖了三小时矿，谁来点评这场灾难？</h3><p>没有观众时，是否希望有人把「又掉进岩浆」钉在耻辱柱上？</p></article>
+<article class="q-card mc-box"><div class="q-num">Q02</div><h3>旁白该不该动手改世界？</h3><p>只说话很安全；能切模式、找群系、砸人一记才像节目效果——如何不卡服？</p></article>
+<article class="q-card mc-box"><div class="q-num">Q03</div><h3>中文字幕、英文语音如何同时成立？</h3><p>旁白能否按玩家语言给字幕，同时走稳定的语音通道？</p></article>
+<article class="q-card mc-box"><div class="q-num">Q04</div><h3>API 密钥该不该进客户端？</h3><p>不该。密钥只在服务端；玩家只消费旁白结果。</p></article>
+<article class="q-card mc-box"><div class="q-num">Q05</div><h3>安静观察者，还是疯批主持人？</h3><p>整活强度能否一旋钮调节，而不是改 Prompt 玄学？</p></article>
+<article class="q-card mc-box"><div class="q-num">Q06</div><h3>喊旁白时，旧台词该不该被打断？</h3><p><code class="inline-code">/nsay</code> 应像被点名——立刻转向，而不是背完旧稿。</p></article>
+</div>
+<div class="bridge reveal"><strong>如果这些问题戳中你</strong>：观察 → 检索技能 → LLM 出计划 → 技能/说话/搜索 → 字幕与语音落地。这是<strong>服务端导演系统</strong>，不是聊天机器人贴皮。</div>
+</section>
+
+<div class="grass-bar" aria-hidden="true"></div>
+
+<section id="framework" class="wrap">
+<div class="section-label">02 CRAFT</div><br/>
+<h2 class="section-title">从想法落到能玩的六步</h2>
+<p class="section-intro">面向服主与单人档主人。</p>
+<div class="step mc-box"><div class="step-index">1</div><div><h3>安装</h3><p>Minecraft <strong>1.21.1</strong> + <strong>NeoForge</strong>，放入 <code class="inline-code">narratoro-0.1.0-alpha.jar</code>。AI 调用只在服务端。</p></div></div>
+<div class="step mc-box"><div class="step-index">2</div><div><h3>接通 LLM / TTS</h3><p>游戏内按 <code class="inline-code">]</code> 打开配置，或：</p>
+<div class="cmd"><span class="c">/narratoro</span> setup llm <span class="g">&lt;base_url&gt; &lt;model&gt; &lt;api_key&gt;</span><br/><span class="c">/narratoro</span> setup tts <span class="g">&lt;base_url&gt; &lt;model&gt; &lt;api_key&gt; [voice]</span><br/><span class="c">/narratoro</span> config save</div>
+<p style="margin-top:.7rem">密钥不回显。改完务必 <code class="inline-code">config save</code>。仅配 LLM 也应能出字幕；配齐 TTS 才有语音。</p></div></div>
+<div class="step mc-box"><div class="step-index">3</div><div><h3>冒烟测试</h3>
+<div class="cmd"><span class="c">/narratoro</span> status<br/><span class="c">/narratoro</span> test speak <span class="g">&lt;玩家&gt; 你好，世界。</span></div></div></div>
+<div class="step mc-box"><div class="step-index">4</div><div><h3>点名旁白</h3>
+<div class="cmd"><span class="c">/nsay</span> <span class="g">评价一下我这套装备</span><br/><span class="c">/nsay</span> <span class="g">找沙漠并把我传过去</span></div>
+<p style="margin-top:.7rem">会打断旧旁白队列，优先响应你。</p></div></div>
+<div class="step mc-box"><div class="step-index">5</div><div><h3>整活强度</h3><p><code class="inline-code">persona.chaos</code> 0–10：低克制、中约一半吐槽带技能、高更疯。</p></div></div>
+<div class="step mc-box"><div class="step-index">6</div><div><h3>玩家体验</h3><p>语音开关、音量、字幕位置/大小；<code class="inline-code">/narratoro player language zh_cn</code> 作语言回退。</p></div></div>
+</section>
+
+<div class="grass-bar" aria-hidden="true"></div>
+
+<section id="features" class="wrap">
+<div class="section-label">03 SKILLS</div><br/>
+<h2 class="section-title">旁白不只是嘴——还能办事</h2>
+<div class="feat-grid">
+<article class="feat mc-box reveal"><div class="feat-icon">◉</div><h3>观察与节奏</h3><p>周期观察；无聊可沉默。开口靠叙事判断，不是固定 CD。</p></article>
+<article class="feat mc-box reveal"><div class="feat-icon">♪</div><h3>字幕 + TTS</h3><p>字幕与语音同包发送；TTS 失败应退回纯字幕。</p></article>
+<article class="feat mc-box reveal"><div class="feat-icon">⌘</div><h3>技能编排</h3><p>多技能连戏：音效、假提示、模式、定位传送、召唤等。</p></article>
+<article class="feat mc-box reveal"><div class="feat-icon">◎</div><h3>定位→传送</h3><p>查群系/结构后可续轮传送（能力开放，注意安全）。</p></article>
+<article class="feat mc-box reveal"><div class="feat-icon">⚡</div><h3>性能熔断</h3><p>重活分 tick；卡顿时停当前演出并清理本场实体。</p></article>
+<article class="feat mc-box reveal"><div class="feat-icon">✎</div><h3>记忆与搜索</h3><p>SQLite 记梗；可选联网并有限续写。</p></article>
+</div>
+<div class="split" style="margin-top:.9rem">
+<div class="panel mc-box reveal"><h3>整活强度</h3>
+<div class="band"><span class="l">Light 0–3</span><span class="m">Medium 4–7</span><span class="h">Heavy 8–10</span></div>
+<p style="margin:0;font-size:.93rem">默认偏 Medium。调低更冷静，调高更节目效果。</p></div>
+<div class="panel mc-box reveal"><h3>指令速查</h3>
+<div class="cmd"><span class="c">/narratoro</span> status<br/><span class="c">/narratoro</span> config save<br/><span class="c">/nsay</span> <span class="g">&lt;对旁白说的话&gt;</span></div></div>
+</div>
+</section>
+
+<div class="grass-bar" aria-hidden="true"></div>
+
+<section id="gallery" class="wrap">
+<div class="section-label">04 SCREENSHOTS</div><br/>
+<h2 class="section-title">配置、对白与整活瞬间</h2>
+<p class="section-intro">来自当前 Alpha 测试局的实际画面。</p>
+<div class="gallery">
+<figure class="mc-box reveal"><img src="assets/shot-config.png" alt="配置界面"/><figcaption><strong>配置界面</strong>游戏内设置页：模型、语音、人格与诊断入口。</figcaption></figure>
+<figure class="mc-box reveal"><img src="assets/shot-persona.png" alt="人格与整活"/><figcaption><strong>人格 / 整活强度</strong>用 chaos 旋钮控制旁白有多敢动手。</figcaption></figure>
+<figure class="mc-box reveal"><img src="assets/shot-ingame.png" alt="游戏内旁白"/><figcaption><strong>游戏内旁白</strong>字幕与场景同框——旁白是现场的一部分。</figcaption></figure>
+<figure class="mc-box reveal"><img src="assets/shot-skill.png" alt="技能整活"/><figcaption><strong>技能整活</strong>「说到做到」：音效、砸击感、节目效果一帧。</figcaption></figure>
+<figure class="wide mc-box reveal"><img src="assets/shot-scene1.png" alt="场景演出 1"/><figcaption><strong>场景演出</strong>旁白配合世界状态与技能制造节奏。</figcaption></figure>
+<figure class="wide mc-box reveal"><img src="assets/shot-scene2.png" alt="场景演出 2"/><figcaption><strong>连续节拍</strong>多技能与对白可编成一段小剧场。</figcaption></figure>
+</div>
+</section>
+
+<div class="grass-bar" aria-hidden="true"></div>
+
+<section id="setup" class="wrap">
+<div class="section-label">05 RULES</div><br/>
+<h2 class="section-title">开放能力，不等于不管服务器</h2>
+<div class="split">
+<div class="panel mc-box reveal"><h3>你该知道</h3>
+<ul class="clean">
+<li>Alpha 未正式发布，配置与行为仍可能变。</li>
+<li>密钥仅服务端。</li>
+<li>任意坐标传送不保证落点安全。</li>
+<li>技能库仍在扩充——欢迎提搞怪技能点子。</li>
+</ul></div>
+<div class="panel mc-box reveal"><h3>推荐姿势</h3>
+<ul class="clean">
+<li>先跑通 test speak 与一次 /nsay。</li>
+<li>chaos 从 5–7 试起。</li>
+<li>公开服观察 MSPT，善用熔断。</li>
+<li>建议与 bug 进 QQ 群。</li>
+</ul></div>
+</div>
+</section>
+
+<div class="grass-bar" aria-hidden="true"></div>
+
+<section id="community" class="wrap">
+<div class="section-label">06 MULTIPLAYER</div><br/>
+<h2 class="section-title">模组还在长身体，建议很值钱</h2>
+<p class="section-intro">技能库能用、能整活，但梗密度还不够。缺什么节目技能、旁白何时不该说话——作者会尽量采纳。</p>
+<div class="author-block mc-box-dark reveal">
+<img src="assets/author.jpg" alt="作者 mccmcaozr" width="96" height="96"/>
+<div>
+<h3>mccmcaozr</h3>
+<p>Narrator-o 作者。闭源 Alpha：以可运行 jar 与玩家向说明为主。</p>
+<div class="qq-box"><span>QQ 交流群</span><strong id="qq">966862436</strong><button type="button" id="copy-qq">复制</button></div>
+</div>
+</div>
+<div class="note reveal"><strong>群里欢迎提：</strong>搞怪技能、定位传送体验、字幕/TTS 适配、以及旁白节奏问题。</div>
+</section>
+</main>
+
+<footer><div class="wrap foot-row">
+<div><strong>Narrator-o</strong> · mccmcaozr · Alpha · All Rights Reserved</div>
+<div>QQ 群 966862436 · Alpha 测试中 · 欢迎进群反馈</div>
+</div></footer>
+<div class="toast" id="toast">COPIED!</div>
+
+  <script src="main.js"></script>
+</body>
+</html>
